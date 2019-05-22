@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import bankguru.LoginPageUI;
 import commons.AbstractPage;
+import commons.PageFactoryMananger;
 
 public class LoginPageObjects extends AbstractPage {
     private WebDriver driver;
@@ -22,9 +23,10 @@ public class LoginPageObjects extends AbstractPage {
 		return getCurrentPageUrl(driver);
 	}
 
-	public void clickToHereLink() {
+	public RegisterPageObject clickToHereLink() {
 		waitForElementVisible(driver, LoginPageUI.HERE_LINK);
 		clickToElement(driver, LoginPageUI.HERE_LINK);
+		return PageFactoryMananger.getRegisterPage(driver);
 		
 	}
 
@@ -39,9 +41,10 @@ public class LoginPageObjects extends AbstractPage {
 
 	}
 
-	public void clickToLoginButton() {
+	public HomePageObject clickToLoginButton() {
 		waitForElementVisible(driver, LoginPageUI.Login_BUTTON);
 		clickToElement(driver, LoginPageUI.Login_BUTTON);
+		return PageFactoryMananger.getHomePage(driver);
 	}
 
 }
