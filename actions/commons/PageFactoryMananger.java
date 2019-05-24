@@ -7,9 +7,9 @@ import pageObjects.LoginPageObjects;
 import pageObjects.RegisterPageObject;
 
 public class PageFactoryMananger {
-	private static LoginPageObjects loginPage;
-	private static RegisterPageObject registerPage;
-	private static HomePageObject homePage;
+//	private static LoginPageObjects loginPage;
+//	private static RegisterPageObject registerPage;
+//	private static HomePageObject homePage;
 	
 	public static LoginPageObjects getLoginPage(WebDriver driver) {
 //		if(loginPage != null) {
@@ -18,26 +18,25 @@ public class PageFactoryMananger {
 //			return new LoginPageObjects(driver);
 //		}
 		
-		if(loginPage == null) {
-			loginPage = new LoginPageObjects(driver);
-		}
-		return loginPage;
+//		if(loginPage == null) {
+//			loginPage = new LoginPageObjects(driver);
+//		}
+		return new LoginPageObjects(driver);
 		
 	}
 	
 	public static RegisterPageObject getRegisterPage(WebDriver driver) {
-		if(registerPage == null) {
-			registerPage = new RegisterPageObject(driver);
-		}
-		return registerPage;
+//		if(registerPage == null) {
+//			registerPage = new RegisterPageObject(driver);
+//		}
+		return new RegisterPageObject(driver);
 	}
 	
 	public static HomePageObject getHomePage(WebDriver driver) {
-		if(homePage == null) {
-			homePage = new HomePageObject(driver);
-		}
-		return homePage;
+//		if(homePage == null) {
+//			homePage = new HomePageObject(driver);
+//		}
+		return new HomePageObject(driver);
 	}
-	
 	
 }
