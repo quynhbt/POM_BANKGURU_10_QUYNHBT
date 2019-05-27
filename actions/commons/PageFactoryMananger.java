@@ -2,41 +2,39 @@ package commons;
 
 import org.openqa.selenium.WebDriver;
 
+import pageObjects.DepositPageObject;
+import pageObjects.FundTransferPageObject;
 import pageObjects.HomePageObject;
 import pageObjects.LoginPageObjects;
+import pageObjects.NewAccountPageObject;
 import pageObjects.RegisterPageObject;
 
 public class PageFactoryMananger {
-//	private static LoginPageObjects loginPage;
-//	private static RegisterPageObject registerPage;
-//	private static HomePageObject homePage;
 	
 	public static LoginPageObjects getLoginPage(WebDriver driver) {
-//		if(loginPage != null) {
-//			return loginPage;
-//		} else {
-//			return new LoginPageObjects(driver);
-//		}
-		
-//		if(loginPage == null) {
-//			loginPage = new LoginPageObjects(driver);
-//		}
 		return new LoginPageObjects(driver);
 		
 	}
 	
 	public static RegisterPageObject getRegisterPage(WebDriver driver) {
-//		if(registerPage == null) {
-//			registerPage = new RegisterPageObject(driver);
-//		}
 		return new RegisterPageObject(driver);
 	}
 	
 	public static HomePageObject getHomePage(WebDriver driver) {
-//		if(homePage == null) {
-//			homePage = new HomePageObject(driver);
-//		}
 		return new HomePageObject(driver);
+	}
+	
+	public static NewAccountPageObject getNewAccountPage(WebDriver driver) {
+		return new NewAccountPageObject(driver);
+		
+	}
+	
+	public static DepositPageObject getDeposiPage(WebDriver driver) {
+		return new DepositPageObject(driver);
+	}
+	
+	public static FundTransferPageObject getFundTransferPage(WebDriver driver) {
+		return new FundTransferPageObject(driver);
 	}
 	
 }

@@ -14,6 +14,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import bankguru.AbstractPageUI;
+import pageObjects.DepositPageObject;
+import pageObjects.FundTransferPageObject;
+import pageObjects.HomePageObject;
+import pageObjects.NewAccountPageObject;
+
 public class AbstractPage {
 	WebElement element;
 	JavascriptExecutor javascriptExecutor;
@@ -25,7 +31,7 @@ public class AbstractPage {
 	long longTimeout = 30;
 	
 	public void openAnyUrl(WebDriver driver, String url) {
-		driver.get(url);	
+		driver.get(url);
 	}
 	
 	public String getCurrentPageUrl(WebDriver driver) {
@@ -66,11 +72,13 @@ public class AbstractPage {
 
 //WebElement
 	public void clickToElement(WebDriver driver, String locator) {
+		highlightElement(driver, locator);
 		element = driver.findElement(By.xpath(locator));
 		element.click();
 	}
 	
 	public void sendKeyToElement(WebDriver driver, String locator, String value) {
+		highlightElement(driver, locator);
 		element = driver.findElement(By.xpath(locator));
 		element.sendKeys(value);
 	}
@@ -151,6 +159,7 @@ public class AbstractPage {
 	}
 	//kiem tra elemnent co duoc hien thi hay k
 	public boolean isControlDisplayed(WebDriver driver, String locator) {
+		highlightElement(driver, locator);
 		element = driver.findElement(By.xpath(locator));
 		return element.isDisplayed();
 	}
@@ -225,7 +234,15 @@ public class AbstractPage {
 	    public void highlightElement(WebDriver driver, String locator) {
 	        JavascriptExecutor js = (JavascriptExecutor) driver;
 	        element = driver.findElement(By.xpath(locator));
-	        js.executeScript("arguments[0].style.color='red'", element);
+	        String originalStyle = element.getAttribute("style");
+	        javascriptExecutor.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style", "border:3px solid red; border-style: dashed;");
+	        try {
+	        	Thread.sleep(800);
+	        } catch (InterruptedException e) {
+	        	e.printStackTrace();
+	       
+	        }
+	        javascriptExecutor.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style", originalStyle);
 	    }
 
 	    public String executeForBrowser(WebDriver driver, String javaSript) {
@@ -291,4 +308,32 @@ public class AbstractPage {
 	    	waitExplicit = new WebDriverWait(driver, 30);
 	    	waitExplicit.until(ExpectedConditions.alertIsPresent());
 	    }
+	    
+	    // viet ham de mo ra 14 page nay
+	    public HomePageObject openHomePage(WebDriver driver) {
+	    	waitForElementVisible(driver, AbstractPageUI.HOME_PAGE_LINK);
+	    	clickToElement(driver, AbstractPageUI.HOME_PAGE_LINK);
+	    	return PageFactoryMananger.getHomePage(driver);
+	    }
+	    
+	    public NewAccountPageObject openNewAccountPage(WebDriver driver) {
+	    	waitForElementVisible(driver, AbstractPageUI.NEW_ACCOUNT_LINK);
+	    	clickToElement(driver, AbstractPageUI.NEW_ACCOUNT_LINK);
+	    	return PageFactoryMananger.getNewAccountPage(driver);
+	    }
+	    
+	    public DepositPageObject openDepositPage(WebDriver driver) {
+	    	waitForElementVisible(driver, AbstractPageUI.DEPOSIT_LINK);
+	    	clickToElement(driver, AbstractPageUI.DEPOSIT_LINK);
+	    	return PageFactoryMananger.getDeposiPage(driver);
+	    }
+	    
+	    public FundTransferPageObject openFundTransferPage(WebDriver driver) {
+	    	waitForElementVisible(driver, AbstractPageUI.FUND_TRANSFER_LINK);
+	    	clickToElement(driver, AbstractPageUI.FUND_TRANSFER_LINK);
+	    	return PageFactoryMananger.getFundTransferPage(driver);
+	    }
+	    
+	    
+	    
 }
