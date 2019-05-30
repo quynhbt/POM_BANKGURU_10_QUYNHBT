@@ -77,10 +77,24 @@ public class AbstractPage {
 		element.click();
 	}
 	
+	public void clickToElement(WebDriver driver, String locator, String...values) {
+		locator = String.format(locator, (Object[]) values);
+		highlightElement(driver, locator);
+		element = driver.findElement(By.xpath(locator));
+		element.click();
+	}
+	
 	public void sendKeyToElement(WebDriver driver, String locator, String value) {
 		highlightElement(driver, locator);
 		element = driver.findElement(By.xpath(locator));
 		element.sendKeys(value);
+	}
+	
+	public void sendKeyToElement(WebDriver driver, String locator, String valueToSendkey, String ...values) {
+		locator = String.format(locator, (Object[]) values);
+		highlightElement(driver, locator);
+		element = driver.findElement(By.xpath(locator));
+		element.sendKeys(valueToSendkey);
 	}
 	
 	public void selectItemInDropdown(WebDriver driver, String locator, String value) {
@@ -137,6 +151,12 @@ public class AbstractPage {
 		element = driver.findElement(By.xpath(locator));
 		return element.getText();
 	}
+ 	
+ 	public String getTextElement(WebDriver driver, String locator, String...values) {
+ 		locator = String.format(locator, (Object[]) values);
+		element = driver.findElement(By.xpath(locator));
+		return element.getText();
+	}
 	
 	public int countElementNumber(WebDriver driver, String locator) {
 		elements = driver.findElements(By.xpath(locator));
@@ -159,6 +179,13 @@ public class AbstractPage {
 	}
 	//kiem tra elemnent co duoc hien thi hay k
 	public boolean isControlDisplayed(WebDriver driver, String locator) {
+		highlightElement(driver, locator);
+		element = driver.findElement(By.xpath(locator));
+		return element.isDisplayed();
+	}
+	
+	public boolean isControlDisplayed(WebDriver driver, String locator, String... values) {
+		locator = String.format(locator, (Object[]) values);
 		highlightElement(driver, locator);
 		element = driver.findElement(By.xpath(locator));
 		return element.isDisplayed();
@@ -232,7 +259,7 @@ public class AbstractPage {
 	    }
 	    
 	    public void highlightElement(WebDriver driver, String locator) {
-	        JavascriptExecutor js = (JavascriptExecutor) driver;
+	    	javascriptExecutor = (JavascriptExecutor) driver;
 	        element = driver.findElement(By.xpath(locator));
 	        String originalStyle = element.getAttribute("style");
 	        javascriptExecutor.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style", "border:3px solid red; border-style: dashed;");
@@ -292,6 +319,13 @@ public class AbstractPage {
 	    	waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(byLocator));
 	    }
 	    
+	    public void waitForElementVisible(WebDriver driver, String locator, String... values) {
+	    	waitExplicit = new WebDriverWait(driver, longTimeout);
+	    	locator = String.format(locator, (Object[]) values);
+	    	byLocator = By.xpath(locator);
+	    	waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(byLocator));
+	    }
+	    
 	    public void waitForElementClickable(WebDriver driver, String locator) {
 	    	waitExplicit = new WebDriverWait(driver, longTimeout);
 	    	byLocator = By.xpath(locator);
@@ -305,7 +339,7 @@ public class AbstractPage {
 	    }
 	    
 	    public void waitForAlertPresence(WebDriver driver) {
-	    	waitExplicit = new WebDriverWait(driver, 30);
+	    	waitExplicit = new WebDriverWait(driver, Constants.LONG_TIMEOUT);
 	    	waitExplicit.until(ExpectedConditions.alertIsPresent());
 	    }
 	    
@@ -334,6 +368,34 @@ public class AbstractPage {
 	    	return PageFactoryMananger.getFundTransferPage(driver);
 	    }
 	    
+	    public AbstractPage openMultiplePage(WebDriver driver, String pageName) {
+	    	waitForElementVisible(driver, AbstractPageUI.DYNAMIC_LINK, pageName);
+	    	clickToElement(driver, AbstractPageUI.DYNAMIC_LINK, pageName);
 	    
+	    	switch (pageName){ 
+	    	case "Manager":
+	    		return PageFactoryMananger.getHomePage(driver);
+	    	case "New Account":
+	    		return PageFactoryMananger.getNewAccountPage(driver);
+	    	case "Deposit":
+	    		return PageFactoryMananger.getDeposiPage(driver);
+	    	case "Fund Transfer":
+	    		return PageFactoryMananger.getFundTransferPage(driver);
+	    	default:
+	    		return PageFactoryMananger.getHomePage(driver);
+	    	}
+	   // cach viet dung if else
+//	    	if(pageName.equalsIgnoreCase("Manager")) {
+//	    		return PageFactoryMananger.getHomePage(driver);
+//	    	} else if(pageName.equalsIgnoreCase("New Account")) {
+//	    		return PageFactoryMananger.getNewAccountPage(driver);
+//	    	} else if(pageName.equalsIgnoreCase("Deposit")) {
+//	    		return PageFactoryMananger.getDeposiPage(driver);
+//	    	}
+	    }
 	    
+	    public void openMultiplePages(WebDriver driver, String pageName) {
+	    	waitForElementVisible(driver, AbstractPageUI.DYNAMIC_LINK, pageName);
+	    	clickToElement(driver, AbstractPageUI.DYNAMIC_LINK, pageName);
+	    }
 }
