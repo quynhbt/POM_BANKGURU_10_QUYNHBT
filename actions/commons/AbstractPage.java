@@ -1,7 +1,9 @@
 package commons;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -177,19 +179,6 @@ public class AbstractPage {
 			element.click();
 		}
 	}
-	//kiem tra elemnent co duoc hien thi hay k
-	public boolean isControlDisplayed(WebDriver driver, String locator) {
-		highlightElement(driver, locator);
-		element = driver.findElement(By.xpath(locator));
-		return element.isDisplayed();
-	}
-	
-	public boolean isControlDisplayed(WebDriver driver, String locator, String... values) {
-		locator = String.format(locator, (Object[]) values);
-		highlightElement(driver, locator);
-		element = driver.findElement(By.xpath(locator));
-		return element.isDisplayed();
-	}
 	
 	public boolean isControlSelected(WebDriver driver, String locator) {
 		element = driver.findElement(By.xpath(locator));
@@ -342,6 +331,56 @@ public class AbstractPage {
 	    	waitExplicit = new WebDriverWait(driver, Constants.LONG_TIMEOUT);
 	    	waitExplicit.until(ExpectedConditions.alertIsPresent());
 	    }
+	    
+	    public void waitToElementInvisible(WebDriver driver, String locator) {
+	    	Date date = new Date();
+	    	By byLocator = By.xpath(locator);
+	    	WebDriverWait waitExplicit = new WebDriverWait(driver, Constants.SHORT_TIMEOUT);
+	    	System.out.println("Start time for wait invisible = " +date.toString());
+	    	waitExplicit.until(ExpectedConditions.invisibilityOfElementLocated(byLocator));
+	    	System.out.println("End time for wait invisible = " + new Date().toString());
+	    }
+	    
+	    public boolean isControlUndisplayed(WebDriver driver, String locator) {
+	    	Date date = new Date();
+	    	System.out.println("Start time =" + date.toString());
+	    	overideTimeout(driver, Constants.SHORT_TIMEOUT);
+	    	List<WebElement> elements = driver.findElements(By.xpath(locator));
+	    	
+	    	if(elements.size() ==0) {
+	    		System.out.println("Element not in DOM");
+	    		System.out.println("End time =" + new Date().toString());
+	    		overideTimeout(driver, Constants.SHORT_TIMEOUT);
+	    		return true;
+	    	} else if(elements.size() >0 &&!elements.get(0).isDisplayed()) {
+	    		System.out.println("Element in DOM but not visible/displayed");
+	    		System.out.println("End time =" + new Date().toString());
+	    		overideTimeout(driver, Constants.SHORT_TIMEOUT);
+	    		return true;
+	    	} else {
+	    		System.out.println("Element in DOM and visible");
+	    		overideTimeout(driver, Constants.SHORT_TIMEOUT);
+	    		return false;
+	    	}
+		}
+	    
+	    public void overideTimeout(WebDriver driver, long timeout) {
+				driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+	    }
+	    
+		//kiem tra elemnent co duoc hien thi hay k
+		public boolean isControlDisplayed(WebDriver driver, String locator) {
+			highlightElement(driver, locator);
+			element = driver.findElement(By.xpath(locator));
+			return element.isDisplayed();
+		}
+		
+		public boolean isControlDisplayed(WebDriver driver, String locator, String... values) {
+			locator = String.format(locator, (Object[]) values);
+			highlightElement(driver, locator);
+			element = driver.findElement(By.xpath(locator));
+			return element.isDisplayed();
+		}
 	    
 	    // viet ham de mo ra 14 page nay
 	    public HomePageObject openHomePage(WebDriver driver) {
