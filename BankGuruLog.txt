@@ -1,0 +1,15 @@
+2019-06-06 17:07:32,872 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - Login - Step 01: Verify Login form displayed
+2019-06-06 17:07:33,942 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - LoginPage - Step 02: Get Login Page Url
+2019-06-06 17:07:33,952 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - RegisterPage - Step 03: Click to 'here' link 
+2019-06-06 17:07:37,146 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - RegisterPage - Step 04: Verify Register Page Displayed 
+2019-06-06 17:07:38,030 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - RegisterPage - Step 05: Input to Email textbox and click to login button 
+2019-06-06 17:07:41,237 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - RegisterPage - Step 06: Get UserID and Password Infor 
+2019-06-06 17:07:41,984 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - Login - Step 01: Open Login Page again
+2019-06-06 17:07:43,564 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - Login - Step 02: Verify Login form displayed
+2019-06-06 17:07:44,817 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - ===FAILED===
+2019-06-06 17:07:44,833 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - Login - Step 03: Input UserID textbox and Password textbox
+2019-06-06 17:07:46,807 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - Login - Step 04: Click to Login button
+2019-06-06 17:07:48,154 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - Login - Step 05: Verify Welcome Message dislayed
+2019-06-06 17:07:50,156 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - ===PASSED==
+2019-06-06 17:07:50,156 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - Login - Step 06: Verify UserID dislayed
+2019-06-06 17:07:51,166 INFO  com.bankguru.account.Account_level_10_AssertVerify_Log_Report - ===PASSED==
