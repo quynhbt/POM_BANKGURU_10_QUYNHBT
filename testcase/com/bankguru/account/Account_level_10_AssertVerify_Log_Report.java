@@ -69,17 +69,20 @@ public class Account_level_10_AssertVerify_Log_Report extends AbstractTest {
 		log.info("Login - Step 02: Verify Login form displayed");
 		verifyFalse(loginPage.isLoginFormDisplayed());
 		
-		log.info("Login - Step 03: Input UserID textbox and Password textbox");
+//		log.info("Login - Step 03: Verify Welcome Message dislayed");
+//		verifyFalse(loginPage.isWelcomeMessageDisplayed());
+		
+		log.info("Login - Step 04: Input UserID textbox and Password textbox");
 		loginPage.inputToUserIDTextbox(userIdfor);
 		loginPage.inputToPasswordTextbox(passwordInfor);
 		
-		log.info("Login - Step 04: Click to Login button");
+		log.info("Login - Step 05: Click to Login button");
 		homePage = loginPage.clickToLoginButton();
 		
-		log.info("Login - Step 05: Verify Welcome Message dislayed");
+		log.info("Login - Step 06: Verify Welcome Message dislayed");
 		verifyTrue(homePage.isWelcomeMessageDisplayed());
 		
-		log.info("Login - Step 06: Verify UserID dislayed");
+		log.info("Login - Step 07: Verify UserID dislayed");
 		verifyTrue(homePage.isUserIDDisplayed(userIdfor));
 
 
