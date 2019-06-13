@@ -18,11 +18,17 @@ public class LoginPageFactory extends AbstractPage {
 	@FindBy(how = How.NAME, using = "uid" )
 	private WebElement userIDTextbox;
 	
-	@FindBy(how = How.NAME, using = "btnLogin" )
+	@FindBy(name= "password")
+	private WebElement passwordTextbox;
+	
+	@FindBy(css = "input[name='btnLogin']" )
 	private WebElement loginButton;
 	
-	@FindBy(how = How.NAME, using = "//a[text()='here']" )
+	@FindBy(how = How.XPATH, using = "//a[text()='here']" )
 	private WebElement hereLink;
+	
+	@FindBy(name = "emailid")
+	private WebElement emailIDTextbox;
 	
 	
 	public LoginPageFactory(WebDriver mappingDriver) {

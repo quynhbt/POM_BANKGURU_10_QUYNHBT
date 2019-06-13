@@ -15,6 +15,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 
 import bankguru.AbstractPageUI;
 import pageObjects.DepositPageObject;
@@ -74,7 +75,7 @@ public class AbstractPage {
 
 //WebElement
 	public void clickToElement(WebDriver driver, String locator) {
-		highlightElement(driver, locator);
+//		highlightElement(driver, locator);
 		element = driver.findElement(By.xpath(locator));
 		element.click();
 	}
@@ -305,7 +306,14 @@ public class AbstractPage {
 	    public void waitForElementVisible(WebDriver driver, String locator) {
 	    	waitExplicit = new WebDriverWait(driver, longTimeout);
 	    	byLocator = By.xpath(locator);
-	    	waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(byLocator));
+	    	try {
+		    	waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(byLocator));
+	    	} catch (Exception ex) {
+	    		Reporter.log("=================================Wait for element not visible================");
+	    		Reporter.log(ex.getMessage());
+	    		System.err.println("=====================================wait for element not visible========================");
+	    		System.err.println(ex.getMessage() + "\n");
+	    	}
 	    }
 	    
 	    public void waitForElementVisible(WebDriver driver, String locator, String... values) {
@@ -370,9 +378,18 @@ public class AbstractPage {
 	    
 		//kiem tra elemnent co duoc hien thi hay k
 		public boolean isControlDisplayed(WebDriver driver, String locator) {
-			highlightElement(driver, locator);
-			element = driver.findElement(By.xpath(locator));
-			return element.isDisplayed();
+			boolean status = true;
+			try {
+				element = driver.findElement(By.xpath(locator));
+				return status;
+	    	} catch (Exception ex) {
+	    		Reporter.log("=================================Wait for element not visible================");
+	    		Reporter.log(ex.getMessage());
+	    		System.err.println("=====================================wait for element not visible========================");
+	    		System.err.println(ex.getMessage() + "\n");
+	    		status = false;
+	    	}
+			return status;
 		}
 		
 		public boolean isControlDisplayed(WebDriver driver, String locator, String... values) {
@@ -437,4 +454,10 @@ public class AbstractPage {
 	    	waitForElementVisible(driver, AbstractPageUI.DYNAMIC_LINK, pageName);
 	    	clickToElement(driver, AbstractPageUI.DYNAMIC_LINK, pageName);
 	    }
+	    
+	    public void clearTextElement(WebDriver driver, String locator) {
+			element = driver.findElement(By.xpath(locator));
+			element.clear();
+		}
+
 }

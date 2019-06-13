@@ -12,7 +12,6 @@ public class HomePageObject extends AbstractPage {
 	
 	public HomePageObject(WebDriver mappingDriver) {
 		driver = mappingDriver;
-		System.out.println("Driver tai Home Page = " + driver.toString());
 	}
 
 	public boolean isWelcomeMessageDisplayed() {
@@ -41,6 +40,23 @@ public class HomePageObject extends AbstractPage {
 		waitForAlertPresence(driver);
 		acceptAlert(driver);
 		return PageFactoryMananger.getLoginPage(driver);
+		
+	}
+
+	public NewCustomerPageObject clickToNewCustomerButton() {
+		waitForElementVisible(driver, HomePageUI.NEW_CUSTOMER_BUTTON);
+		clickToElement(driver, HomePageUI.NEW_CUSTOMER_BUTTON);
+		return PageFactoryMananger.getNewCustomerPage(driver);
+	
+	}
+	
+	public String getHomePageUrl() {
+		return getCurrentPageUrl(driver);
+	}
+
+	public void clickToEditCustomerButton() {
+		waitForElementVisible(driver, HomePageUI.EDIT_CUSTOMER_BUTTON);
+		clickToElement(driver, HomePageUI.EDIT_CUSTOMER_BUTTON);
 		
 	}
 

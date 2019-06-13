@@ -6,4 +6,7 @@ public class HomePageUI {
 	public static final String USER_ID_TEXT = "//td[text()='Manger Id : %s']";
 	public static final String LOG_OUt_LINK = "//a[text()='Log out']";
 	public static final String USER_DATA = "//div[@id='userdata_el']";
+	public static final String NEW_CUSTOMER_BUTTON = "//a[text()='New Customer']";
+	public static final String EDIT_CUSTOMER_BUTTON = "//a[text()='Edit Account']";
+
 	}
