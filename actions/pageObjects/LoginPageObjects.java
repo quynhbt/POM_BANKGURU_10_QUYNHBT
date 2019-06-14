@@ -11,7 +11,6 @@ public class LoginPageObjects extends AbstractPage {
 	
 	public LoginPageObjects(WebDriver mappingDriver) {
 		driver = mappingDriver;
-		System.out.println("Driver tai Login Page = " + driver.toString());
 	}
 
 	public boolean isLoginFormDisplayed() {

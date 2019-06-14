@@ -11,7 +11,6 @@ public class RegisterPageObject extends AbstractPage {
 	
 	public RegisterPageObject(WebDriver mappingDriver) {
 		driver = mappingDriver;
-		System.out.println("Driver tai Register Page = " + driver.toString());
 	}
 	public boolean isRegisterPageDisplayed() {
 		waitForElementVisible(driver, RegisterPageUI.EMAIL_ID_TEXTBOX);

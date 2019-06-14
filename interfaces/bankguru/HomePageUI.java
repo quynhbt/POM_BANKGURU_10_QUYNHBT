@@ -8,5 +8,6 @@ public class HomePageUI {
 	public static final String USER_DATA = "//div[@id='userdata_el']";
 	public static final String NEW_CUSTOMER_BUTTON = "//a[text()='New Customer']";
 	public static final String EDIT_CUSTOMER_BUTTON = "//a[text()='Edit Account']";
-
+	public static final String DEPOSIT_BUTTON = "//a[text()='Deposit']";
+	public static final String WITHDRAWAL_BUTTON = "//a[text()='Withdrawal']";
 	}

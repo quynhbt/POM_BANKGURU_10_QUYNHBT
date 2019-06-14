@@ -16,4 +16,5 @@ public class AbstractPageUI {
 	public static final String MINI_STATEMENT_LINK = "//ul[@class='menusubnav']//a[text()='Mini Statement']";
 	public static final String CUSTOMISED_STATEMENT_LINK = "//ul[@class='menusubnav']//a[text()='Customised Statement']";
 
+	public static final String DYNAMIC_LINK = "//ul[@class='menusubnav']//a[text()='%s']";
 }

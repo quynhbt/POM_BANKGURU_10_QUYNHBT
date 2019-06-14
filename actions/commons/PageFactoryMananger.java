@@ -46,4 +46,9 @@ public class PageFactoryMananger {
 	public static EditCustomerPageObject getEditCustomerPage(WebDriver driver) {
 		return new EditCustomerPageObject (driver);
 	}
+	
+	public static DepositPageObject getDepositPage(WebDriver driver) {
+		return new DepositPageObject (driver);
+		
+	}
 }
