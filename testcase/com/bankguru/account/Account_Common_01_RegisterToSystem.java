@@ -33,29 +33,34 @@ public class Account_Common_01_RegisterToSystem extends AbstractTest {
 		loginPage = PageFactoryMananger.getLoginPage(driver);
 	}
 	@Test
-	public void TC_01_CheckAssertAndVerify() {
+	public void TC_01_RegisterToSystem() {
 		log.info("Login - Step 01: Verify Login form displayed");
-		Assert.assertTrue(loginPage.isLoginFormDisplayed());
+//		Assert.assertTrue(loginPage.isLoginFormDisplayed());
 		
 		log.info("LoginPage - Step 02: Get Login Page Url");
 		loginPageUrl = loginPage.getLoginPageUrl();
 		
 		log.info("RegisterPage - Step 03: Click to 'here' link ");
 		registerPage = loginPage.clickToHereLink();
-		
-		log.info("RegisterPage - Step 04: Verify Register Page Displayed ");
-		Assert.assertTrue(registerPage.isRegisterPageDisplayed());
-		
 		log.info("RegisterPage - Step 05: Input to Email textbox and click to login button ");
 		registerPage.inputToEmailIDTextbox(email);
 		registerPage.clickToLoginButton();
 		
 		log.info("RegisterPage - Step 06: Get UserID and Password Infor ");
-		USER_ID_FOR = registerPage.getUserIDInfor();
-		PASSWORD_IN_FOR = registerPage.getPasswordInfor();
+		USER_ID = registerPage.getUserIDInfor();
+		PASSWORD = registerPage.getPasswordInfor();
 
 	}
 	
+//	@Test
+//	public void TC_02_Login () {
+//		loginPage=(LoginPageObjects) registerPage.openMultiplePage(driver, "Login");
+//		Assert.assertTrue(loginPage.isLoginFormDisplayed());
+//		loginPage.inputToUserIDTextbox(USER_ID);
+//		loginPage.inputToPasswordTextbox(PASSWORD);
+//		homePage=(HomePageObject) loginPage.clickToLoginButton();
+//		Assert.assertTrue(homePage.isWelcomeMessageDisplayed());
+//	}
 	
 	@AfterClass(alwaysRun=true)
 	public void afterClass() {
@@ -70,7 +75,7 @@ public class Account_Common_01_RegisterToSystem extends AbstractTest {
 	}
 	
 	 private WebDriver driver;
-	 	public static String USER_ID_FOR, PASSWORD_IN_FOR;
+	 	public static String USER_ID, PASSWORD;
 		String loginPageUrl, email;
 		AbstractPage abstractPage;
 		LoginPageObjects loginPage;

@@ -69,8 +69,12 @@ public class AbstractPage {
 		driver.switchTo().alert().dismiss();
 	}
 	
-	public String getTextInAlert(WebDriver driver) {
+	public String getTextAlert(WebDriver driver) {
 		return driver.switchTo().alert().getText();
+	}
+	
+	public void sendkeyToAlert(WebDriver driver, String value) {
+		driver.switchTo().alert().sendKeys(value);
 	}
 
 //WebElement
@@ -201,7 +205,7 @@ public class AbstractPage {
 	             }
 	        }
 	    }
-	    public void switchToChildWindowByTitle(WebDriver driver, String expectedTitle) {
+	    public void switchToWindowByTitle(WebDriver driver, String expectedTitle) {
 	        Set<String> allWindows = driver.getWindowHandles();
 	        for (String runWindows : allWindows) {
 	             driver.switchTo().window(runWindows);
@@ -247,6 +251,13 @@ public class AbstractPage {
 	    	action = new Actions(driver);
 	    	action.sendKeys(element, key);
 	    }
+	    
+	    public void sendKeyDynamicboardToElement(WebDriver driver,  Keys key,String locator,String ...dynamicValue) {
+			locator=String.format(locator, (Object[])dynamicValue );
+			WebElement element = driver.findElement(By.xpath(locator));
+			Actions action = new Actions(driver);
+			action.sendKeys(element, key).perform();
+		}
 	    
 	    public void highlightElement(WebDriver driver, String locator) {
 	    	javascriptExecutor = (JavascriptExecutor) driver;
@@ -435,6 +446,8 @@ public class AbstractPage {
 	    		return PageFactoryMananger.getNewAccountPage(driver);
 	    	case "Deposit":
 	    		return PageFactoryMananger.getDeposiPage(driver);
+	    	case "Login":
+	    		return PageFactoryMananger.getLoginPage(driver);
 	    	case "Fund Transfer":
 	    		return PageFactoryMananger.getFundTransferPage(driver);
 	    	default:
@@ -459,5 +472,53 @@ public class AbstractPage {
 			element = driver.findElement(By.xpath(locator));
 			element.clear();
 		}
+	    
+	    public void waitForControlVisible(WebDriver driver, String locator) {
+			WebDriverWait wait = new WebDriverWait(driver, Constants.LONG_TIMEOUT);
+			try {
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+			} catch (Exception e) {
+				// System.out.println(e.getMessage());
+			}
+		}
+
+		public void waitForControlVisible(WebDriver driver, String locator, String... dynamicValue) {
+			locator = String.format(locator, (Object[]) dynamicValue);
+			WebDriverWait wait = new WebDriverWait(driver, Constants.LONG_TIMEOUT);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+		}
+		
+		// Dynamic
+		public void clickToDynamicButtonTextboxTextArea(WebDriver driver, String fieldName) {
+	    	waitForElementVisible(driver, AbstractPageUI.DYNAMIC_LINK, fieldName);
+	    	clickToElement(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BUTTON_CHECKBOX, fieldName);
+		}
+		
+		public void inputToDynamicTextboxOrTextArea(WebDriver driver,String fieldName, String value) {
+			waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BUTTON_CHECKBOX, fieldName);
+			sendKeyToElement(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BUTTON_CHECKBOX, value, fieldName);
+		}
+		
+		public String getDynamicErrorMessage(WebDriver driver,String fieldName ) {
+			waitForElementVisible(driver, AbstractPageUI.DYNAMIC_ERROR_MESSAGE, fieldName);
+			return getTextElement(driver, AbstractPageUI.DYNAMIC_ERROR_MESSAGE, fieldName);
+		}
+		
+		public boolean isDynamicPageTitleOrPageMessageDisplayed(WebDriver driver, String pageTitle) {
+			waitForElementVisible(driver, AbstractPageUI.DYNAMIC_PAGE_OR_MESSAGE_DISPLAYED, pageTitle);
+			return isControlDisplayed(driver, AbstractPageUI.DYNAMIC_PAGE_OR_MESSAGE_DISPLAYED, pageTitle);
+		}
+		
+		public boolean getDynamicValueInTable(WebDriver driver, String fieldName) {
+			waitForElementVisible(driver, AbstractPageUI.DYNAMIC_VALUE_IN_TABLE, fieldName);
+			return isControlDisplayed(driver, AbstractPageUI.DYNAMIC_VALUE_IN_TABLE, fieldName);
+		}
+		
+		public void DynamicPressTabTextArea(WebDriver driver,String dynamicValue) {
+			waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BUTTON_CHECKBOX, dynamicValue);
+			sendKeyDynamicboardToElement(driver, Keys.TAB, AbstractPageUI.DYNAMIC_TEXTBOX_BUTTON_CHECKBOX, dynamicValue);
+		}
+		
+		
 
 }
