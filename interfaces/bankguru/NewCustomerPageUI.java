@@ -1,6 +1,8 @@
 package bankguru;
 
 public class NewCustomerPageUI {
+	public static final String NEW_CUSTOMER_TEXT="//p[text()='Add New Customer']";
+	public static final String CUSTOMER_FORM="//form[@name='addcust']";
 	public static final String CUSTOMER_NAME_TEXTBOX = "//input[@name='name']";
 	public static final String CUSTOMER_NAME_MUST_NOT_BE_BLANK_MESSAGE = "//label[text()='Customer name must not be blank']";
 	public static final String NUMERIC_ARE_NOT_ALLOW_MESSAGE = "//label[text()='Numbers are not allowed']";

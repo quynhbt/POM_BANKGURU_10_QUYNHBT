@@ -17,11 +17,16 @@ public class NewAccountPageObject extends AbstractPage {
 	public NewAccountPageObject(WebDriver mappingDriver) {
 		driver = mappingDriver;
 	}
-
+	
 	public boolean isNewAccountPageDisplayed() {
-		waitForControlVisible(driver,NewAccountPageUI.ACCOUNT_GENERATED_SUCCESS_MESSAGE);
-		return isControlDisplayed(driver, NewAccountPageUI.ACCOUNT_GENERATED_SUCCESS_MESSAGE);
+		waitForControlVisible(driver,NewAccountPageUI.ADD_NEW_ACCOUNT_FORM_MESSAGE);
+		return isControlDisplayed(driver, NewAccountPageUI.ADD_NEW_ACCOUNT_FORM_MESSAGE);
 	}
+
+//	public boolean isNewAccountPageDisplayed() {
+//		waitForControlVisible(driver,NewAccountPageUI.ACCOUNT_GENERATED_SUCCESS_MESSAGE);
+//		return isControlDisplayed(driver, NewAccountPageUI.ACCOUNT_GENERATED_SUCCESS_MESSAGE);
+//	}
 	public void inputCustomerID(String CustomerID) {
 		waitForControlVisible(driver, NewAccountPageUI.CUSTOMER_ID_TEXTBOX);
 		sendKeyToElement(driver, NewAccountPageUI.CUSTOMER_ID_TEXTBOX, CustomerID);

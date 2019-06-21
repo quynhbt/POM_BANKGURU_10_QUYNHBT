@@ -1,6 +1,7 @@
 package bankguru;
 
 public class WithdrawPageUI {
+	
 	public static final String AMOUNT_WITHDRAW_FORM_MESSAGE = "//p[text()='Amount Withdrawal Form']";
 	public static final String ACCOUNT_NO_TEXTBOX = "//input[@name='accountno']";
 	public static final String AMOUNT_TEXTBOX = "//input[@name='ammount']";

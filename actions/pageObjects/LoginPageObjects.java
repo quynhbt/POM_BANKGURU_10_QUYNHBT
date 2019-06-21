@@ -2,8 +2,10 @@ package pageObjects;
 
 import org.openqa.selenium.WebDriver;
 
+import bankguru.AbstractPageUI;
 import bankguru.LoginPageUI;
 import commons.AbstractPage;
+import commons.Constants;
 import commons.PageFactoryMananger;
 
 public class LoginPageObjects extends AbstractPage {
@@ -45,5 +47,15 @@ public class LoginPageObjects extends AbstractPage {
 		clickToElement(driver, LoginPageUI.Login_BUTTON);
 		return PageFactoryMananger.getHomePage(driver);
 	}
-
+	
+	public void senkeyDynamicPage(WebDriver driver, String inputName) {
+		waitForControlVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX_BUTTON_CHECKBOX, inputName );
+		sendKeyToElement(driver, Constants.CUSTOMER_NAME_SENKEY,AbstractPageUI.DYNAMIC_TEXTBOX_BUTTON_CHECKBOX, inputName);
+	}
+	
+	public LoginPageObjects openLoginPage(String loginPageUrl) {
+		openAnyUrl(driver, loginPageUrl);
+		//return new LoginPageObject(driver);
+		return PageFactoryMananger.getLoginPage(driver);
+	}
 }

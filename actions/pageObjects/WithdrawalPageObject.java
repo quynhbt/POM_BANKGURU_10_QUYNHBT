@@ -8,6 +8,7 @@ import bankguru.HomePageUI;
 import bankguru.RegisterPageUI;
 import bankguru.WithdrawPageUI;
 import commons.AbstractPage;
+import commons.Constants;
 import commons.PageFactoryMananger;
 
 
@@ -23,21 +24,20 @@ public class WithdrawalPageObject extends AbstractPage {
 		return isControlDisplayed(driver, WithdrawPageUI.AMOUNT_WITHDRAW_FORM_MESSAGE);
 		
 	}
-	public void inputAccountIDToAccountNoTextbox(String accountID) {
+	public void inputAccountIDToAccountNoTextbox(String AccountID) {
 		waitForElementVisible(driver, WithdrawPageUI.ACCOUNT_NO_TEXTBOX);
-		sendKeyToElement(driver, WithdrawPageUI.ACCOUNT_NO_TEXTBOX, accountID);
+		sendKeyToElement(driver, WithdrawPageUI.ACCOUNT_NO_TEXTBOX, AccountID);
 		
 	}
-	public void inputAmountToAmountTextbox(String withdrawalamount) {
+	public void inputAmountToAmountTextbox() {
 		waitForElementVisible(driver, WithdrawPageUI.AMOUNT_TEXTBOX);
-		sendKeyToElement(driver, WithdrawPageUI.AMOUNT_TEXTBOX, withdrawalamount);
+		sendKeyToElement(driver, WithdrawPageUI.AMOUNT_TEXTBOX, Constants.AMOUNT_WITHDRAWAL_TEXTBOX);
 		
 	}
 
 	public void clickToWithdrawSubmitButton() {
 		waitForElementVisible(driver, WithdrawPageUI.WITHDRAW_SUBMIT_BUTTON);
 		clickToElement(driver, WithdrawPageUI.WITHDRAW_SUBMIT_BUTTON);
-		
 
 	}
 
@@ -54,14 +54,19 @@ public class WithdrawalPageObject extends AbstractPage {
 		openAnyUrl(driver, homePageUrl);
 		
 	}
-	public void inputDescriptionToDescriptionTextbox(String withdrawDescription) {
+	public void inputDescriptionToDescriptionTextbox() {
 		waitForElementVisible(driver, WithdrawPageUI.DESCRIPTION_TEXTBOX);
-		sendKeyToElement(driver, WithdrawPageUI.DESCRIPTION_TEXTBOX, withdrawDescription);
+		sendKeyToElement(driver, WithdrawPageUI.DESCRIPTION_TEXTBOX, Constants.DESCRIPTION_WITHDRAWAL_TEXTBOX);
 	}
 	
 	public void clickToFunTransferButton() {
 		waitForElementVisible(driver, WithdrawPageUI.FUND_TRANSFER);
-		clickToElement(driver, HomePageUI.DEPOSIT_BUTTON);
+		clickToElement(driver, WithdrawPageUI.FUND_TRANSFER);
+	}
+	
+	public boolean isTransactionSuccessfullyPageDisplayed(String locator) {
+		waitForControlVisible(driver, locator);
+		return isControlDisplayed(driver, locator);
 	}
 
 }

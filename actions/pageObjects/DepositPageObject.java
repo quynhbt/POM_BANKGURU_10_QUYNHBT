@@ -5,6 +5,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import bankguru.DepositPageUI;
 import commons.AbstractPage;
+import commons.Constants;
 import commons.PageFactoryMananger;
 
 public class DepositPageObject extends AbstractPage {
@@ -24,18 +25,21 @@ public class DepositPageObject extends AbstractPage {
 		sendKeyToElement(driver, DepositPageUI.ACCOUNT_NO_TEXTBOX, accountID);
 		
 	}
-	public void inputAmountToAmountTextbox(String depositAmount) {
+	public void inputAmountToAmountTextbox() {
 		waitForElementVisible(driver, DepositPageUI.AMOUNT_TEXTBOX);
-		sendKeyToElement(driver, DepositPageUI.AMOUNT_TEXTBOX, depositAmount);
+		sendKeyToElement(driver, DepositPageUI.AMOUNT_TEXTBOX, Constants.AMOUNT_TEXTBOX);
 		
 	}
 
 	public void clickToDepositSubmitButton() {
 		waitForElementVisible(driver, DepositPageUI.DEPOSIT_SUBMIT_BUTTON);
 		clickToElement(driver, DepositPageUI.DEPOSIT_SUBMIT_BUTTON);
-		waitForElementVisible(driver, DepositPageUI.SUBMIT_BUTTON);
-		clickToElement(driver, DepositPageUI.SUBMIT_BUTTON);
-
+	
+	}
+	
+	public boolean isTransactionSuccessfullyPageDisplayed(String locator) {
+		waitForControlVisible(driver, locator);
+		return isControlDisplayed(driver, locator);
 	}
 
 	public boolean isCorrectTracsactionDetailsMessageDisplayed(String accountID) {
@@ -51,9 +55,9 @@ public class DepositPageObject extends AbstractPage {
 		openAnyUrl(driver, homePageUrl);
 		
 	}
-	public void inputDescriptionToDescriptionTextbox(String depositDescription) {
+	public void inputDescriptionToDescriptionTextbox() {
 		waitForElementVisible(driver, DepositPageUI.DESCRIPTION_TEXTBOX);
-		sendKeyToElement(driver, DepositPageUI.DESCRIPTION_TEXTBOX, depositDescription);
+		sendKeyToElement(driver, DepositPageUI.DESCRIPTION_TEXTBOX, Constants.DESCRIPTION_TEXTBOX);
 
 	}
 

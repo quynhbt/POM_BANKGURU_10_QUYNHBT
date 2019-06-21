@@ -70,4 +70,12 @@ public class HomePageObject extends AbstractPage {
 		clickToElement(driver, HomePageUI.WITHDRAWAL_BUTTON);
 	}
 
+	public NewAccountPageObject clickToNewAccountButton() {
+		waitForElementVisible(driver, HomePageUI.NEW_ACCOUNT_BUTTON);
+		clickToElement(driver, HomePageUI.NEW_ACCOUNT_BUTTON);
+		return PageFactoryMananger.getNewAccountPage(driver);
+	}
+	
+	
 }
+

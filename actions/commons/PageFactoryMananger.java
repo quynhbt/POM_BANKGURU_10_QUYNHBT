@@ -10,6 +10,7 @@ import pageObjects.LoginPageObjects;
 import pageObjects.NewAccountPageObject;
 import pageObjects.NewCustomerPageObject;
 import pageObjects.RegisterPageObject;
+import pageObjects.WithdrawalPageObject;
 
 public class PageFactoryMananger {
 	
@@ -50,5 +51,9 @@ public class PageFactoryMananger {
 	public static DepositPageObject getDepositPage(WebDriver driver) {
 		return new DepositPageObject (driver);
 		
+	}
+	
+	public static WithdrawalPageObject getWithdrawalPage(WebDriver driver) {
+		return new WithdrawalPageObject(driver);
 	}
 }

@@ -3,9 +3,11 @@ package pageObjects;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
+import bankguru.EditCustomerPageUI;
 import bankguru.NewCustomerPageUI;
 import bankguru.RegisterPageUI;
 import commons.AbstractPage;
+import commons.Constants;
 import commons.PageFactoryMananger;
 
 public class NewCustomerPageObject extends AbstractPage {
@@ -14,7 +16,62 @@ public class NewCustomerPageObject extends AbstractPage {
 	public NewCustomerPageObject(WebDriver mappingDriver) {
 		driver = mappingDriver;
 	}
+	public boolean isAddCustomerFormUndisplayed() {
+		waitForElementVisible(driver, NewCustomerPageUI.CUSTOMER_FORM);
+		return isControlUndisplayed(driver, NewCustomerPageUI.CUSTOMER_FORM);
+	}
+	
+	public boolean isNewCustomerPageDisplayed() {
+		waitForElementVisible(driver,NewCustomerPageUI.NEW_CUSTOMER_TEXT);
+		return isControlDisplayed(driver, NewCustomerPageUI.NEW_CUSTOMER_TEXT);
+	}
+	
+	public boolean isNewCustomerSuccessfullyPageDisplayed() {
+		waitForControlVisible(driver,NewCustomerPageUI.REGISTER_CUSTOMER_SUCCESS_MESSAGE);
+		return isControlDisplayed(driver, NewCustomerPageUI.REGISTER_CUSTOMER_SUCCESS_MESSAGE);
+	}
+	public  void inputAdressTextArea() {
+		waitForControlVisible(driver, NewCustomerPageUI.ADDR_TEXTAREA);
+		sendKeyToElement(driver, NewCustomerPageUI.ADDR_TEXTAREA, Constants.ADDRESS_TEXTAREA);
+	}
+	public  void inputDateOfBirthText() {
+		waitForControlVisible(driver, NewCustomerPageUI.DATE_OF_BIRTH_TEXTBOX);
+		sendKeyToElement(driver, NewCustomerPageUI.DATE_OF_BIRTH_TEXTBOX, Constants.DATE_OF_BIRTH_TEXTBOX);
+	}
+	public  void inputCityText() {
+		waitForControlVisible(driver, NewCustomerPageUI.CITY_TEXTBOX);
+		sendKeyToElement(driver, NewCustomerPageUI.CITY_TEXTBOX, Constants.CITY_TEXTBOX);
+	}
+	public  void inputStateText() {
+		waitForControlVisible(driver, NewCustomerPageUI.STATE_TEXTBOX);
+		sendKeyToElement(driver, NewCustomerPageUI.STATE_TEXTBOX, Constants.EDIT_STATE_TEXTBOX);
+	}
+	public  void inputPinText() {
+		waitForControlVisible(driver, NewCustomerPageUI.PIN_TEXTBOX);
+		sendKeyToElement(driver, NewCustomerPageUI.PIN_TEXTBOX, Constants.PIN_TEXTBOX);
+	}
+	public  void inputMobileText() {
+		waitForControlVisible(driver, NewCustomerPageUI.MOBILE_NUMBER_TEXTBOX);
+		sendKeyToElement(driver, NewCustomerPageUI.MOBILE_NUMBER_TEXTBOX, Constants.MOBILE_NUMBER_TEXTBOX);
+	}
+	public  void inputEmailText(String email) {
+		waitForControlVisible(driver, NewCustomerPageUI.EMAIL_TEXTBOX);
+		sendKeyToElement(driver, NewCustomerPageUI.EMAIL_TEXTBOX, email);
+	}
+	public  void inputPasswordText() {
+		waitForControlVisible(driver, NewCustomerPageUI.PASSWORD_TEXTBOX);
+		sendKeyToElement(driver, NewCustomerPageUI.PASSWORD_TEXTBOX, Constants.PASSWORD_TEXTBOX);
+	}
 
+	public  void clicksubmitButton() {
+		waitForControlVisible(driver, NewCustomerPageUI.SUBMIT_BUTTON);
+		clickToElementByJS(driver,NewCustomerPageUI.SUBMIT_BUTTON);
+	}
+	public String getCustomerIDText() {
+		waitForControlVisible(driver, EditCustomerPageUI.EDIT_CUSTOMER_NAME_TEXT);
+		return getTextInElement(driver, EditCustomerPageUI.EDIT_CUSTOMER_NAME_TEXT);
+	}
+	
 	public String getNewCustomerPageUrl() {
 		return getCurrentPageUrl(driver);
 	}

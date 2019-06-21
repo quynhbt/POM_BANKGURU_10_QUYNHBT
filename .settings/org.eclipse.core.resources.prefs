@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//actions/commons/AbstractTest.java=UTF-8
+encoding//testcase/com/bankguru/account/Account_Common_01_RegisterToSystem.java=UTF-8
 encoding//testcase/com/bankguru/account/Account_level_05_PageFactoryManager_SingletonPattern.java=UTF-8
 encoding//testcase/com/bankguru/account/Account_level_06_MultipleBrowser_ParallelTesting.java=UTF-8
 encoding//testcase/com/bankguru/account/Account_level_07_WebDriverLifeCyCle_ActionChain.java=UTF-8

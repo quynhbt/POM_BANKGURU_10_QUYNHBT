@@ -1,13 +1,11 @@
 package bankguru;
 
 public class EditCustomerPageUI {
-	
+	public static final String EDIT_CUSTOMERID_TEXT=" //p[text()='Edit Customer Form']";
 	public static final String CUSTOMER_ID_TEXTBOX = "//input[@name='cusid']";
 	public static final String SUBMIT_CUTOMER_ID_BUTTON = "//input[@name='AccSubmit']";
 	public static final String RESET_CUTOMER_ID_BUTTON = "//input[@name='res']";
 
-	public static final String EDIT_ADDRESS_TEXTAREA = "//textarea[@name='addr']";	
-	public static final String EDIT_CITY_TEXTBOX = "//input[@name='city']";
 	public static final String EDIT_STATE_TEXTBOX = "//input[@name='state']";
 	public static final String EDIT_PIN_TEXTBOX = "//input[@name='pinno']";
 	public static final String EDIT_MOBILE_NUMBER_TEXTBOX = "//input[@name='telephoneno']";
@@ -16,10 +14,6 @@ public class EditCustomerPageUI {
 	public static final String EDIT_RESET_BUTTON = "//input[@type='reset']";
 	public static final String ADDRESS_TEXTAREA = "//textarea[@name='addr']";	
 	public static final String CITY_TEXTBOX = "//input[@name='city']";
-	public static final String STATE_TEXTBOX = "//input[@name='state']";
-	public static final String PIN_TEXTBOX = "//input[@name='pinno']";
-	public static final String MOBILE_NUMBER_TEXTBOX = "//input[@name='telephoneno']";
-	public static final String EMAIL_TEXTBOX = "//input[@name='emailid']";
 	public static final String SUBMIT_EDIT_BUTTON = "//input[@type='submit']";
 	public static final String RESET_EDIT_BUTTON = "//input[@type='reset']";
 
@@ -52,7 +46,10 @@ public class EditCustomerPageUI {
 	public static final String CUSTOMER_ID_CHARACTERS_ARE_NOT_ALLOW_MESSAGE = "//td[text()='Customer ID']//following-sibling::td/label[text()='Characters are not allowed']";
 	public static final String CUSTOMER_ID_SPECIAL_CHARACTERS_ARE_NOT_ALLOW_MESSAGE = "//td[text()='Customer ID']//following-sibling::td/label[text()='Special characters are not allowed']";
 	public static final String CUSTOMER_ID_FIRST_CHARACTERS_CAN_NOT_HAVE_SPACE_MESSAGE = "//td[text()='Customer ID']//following-sibling::td/label[text()='First character can not have space']";
-
+	public static final String EDIT_CUSTOMER_NAME_TEXT="//td[text()='Customer ID']//following-sibling::td";
+	
+	public static final String SUBMIT_CUSTOMER_EDIT_BUTTON="//input[@value='Submit']";
+	
 	public static final String EDIT_ADDRESS_FIELD_MUST_NOT_BE_BLANK_MESSAGE = "//label[text()='Address Field must not be blank']";
 	public static final String EDIT_ADDRESS_SPECIAL_CHARACTERS_ARE_NOT_ALLOW_MESSAGE = "//td[text()='Address']//following-sibling::td/label[text()='Special characters are not allowed']";
 	public static final String EDIT_ADDRESS_FIRST_CHARACTERS_CAN_NOT_HAVE_SPACE_MESSAGE = "//td[text()='Address']//following-sibling::td/label[text()='First character can not have space']";

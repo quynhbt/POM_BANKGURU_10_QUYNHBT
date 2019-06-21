@@ -2,6 +2,7 @@ package commons;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -410,6 +411,11 @@ public class AbstractPage {
 			return element.isDisplayed();
 		}
 	    
+		public String getTextInElement(WebDriver driver, String locator) {
+			WebElement element = driver.findElement(By.xpath(locator));
+			return element.getText();
+		}
+		
 	    // viet ham de mo ra 14 page nay
 	    public HomePageObject openHomePage(WebDriver driver) {
 	    	waitForElementVisible(driver, AbstractPageUI.HOME_PAGE_LINK);
@@ -442,8 +448,14 @@ public class AbstractPage {
 	    	switch (pageName){ 
 	    	case "Manager":
 	    		return PageFactoryMananger.getHomePage(driver);
+	    	case "Edit Customer":
+	    		return PageFactoryMananger.getEditCustomerPage(driver);
 	    	case "New Account":
 	    		return PageFactoryMananger.getNewAccountPage(driver);
+	    	case "New Customer":
+	    		return PageFactoryMananger.getNewCustomerPage(driver);
+	    	case "Withdrawal":
+	    		return PageFactoryMananger.getWithdrawalPage(driver);
 	    	case "Deposit":
 	    		return PageFactoryMananger.getDeposiPage(driver);
 	    	case "Login":
@@ -519,6 +531,4 @@ public class AbstractPage {
 			sendKeyDynamicboardToElement(driver, Keys.TAB, AbstractPageUI.DYNAMIC_TEXTBOX_BUTTON_CHECKBOX, dynamicValue);
 		}
 		
-		
-
 }
