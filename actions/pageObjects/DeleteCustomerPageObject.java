@@ -3,6 +3,7 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 
 import bankguru.DeleteAccountPageUI;
+import bankguru.DeleteCustomerPageUI;
 import commons.AbstractPage;
 
 
@@ -13,10 +14,16 @@ public class DeleteCustomerPageObject extends AbstractPage {
 		driver = driverMapping;
 	}
 
-	public boolean isDeleteAccountDisplayed() {
-		waitForControlVisible(driver, DeleteAccountPageUI.DELETE_ACCOUNT_TEXT);
-		return isControlDisplayed(driver, DeleteAccountPageUI.DELETE_ACCOUNT_TEXT);
+	public boolean isDeleteCustomerDisplayed() {
+		waitForControlVisible(driver, DeleteCustomerPageUI.DELETE_CUSTOMER_TEXT);
+		return isControlDisplayed(driver, DeleteCustomerPageUI.DELETE_CUSTOMER_TEXT);
 	}
+	
+	public void inputCustomerID(String CustomerID) {
+		waitForControlVisible(driver, DeleteCustomerPageUI.CUSTOMER_ID_SENKEY);
+		sendKeyToElement(driver,  DeleteCustomerPageUI.CUSTOMER_ID_SENKEY, CustomerID);
+	}
+
 
 	public void inputAccountID(String AccountID) {
 		waitForControlVisible(driver, DeleteAccountPageUI.ACCOUNT_NO_SENKEY);

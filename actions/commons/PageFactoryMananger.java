@@ -2,6 +2,9 @@ package commons;
 
 import org.openqa.selenium.WebDriver;
 
+import pageObjects.BalanceEnquiryPageObject;
+import pageObjects.DeleteAccountPageObject;
+import pageObjects.DeleteCustomerPageObject;
 import pageObjects.DepositPageObject;
 import pageObjects.EditCustomerPageObject;
 import pageObjects.FundTransferPageObject;
@@ -55,5 +58,17 @@ public class PageFactoryMananger {
 	
 	public static WithdrawalPageObject getWithdrawalPage(WebDriver driver) {
 		return new WithdrawalPageObject(driver);
+	}
+	
+	public static BalanceEnquiryPageObject getBalanceEnquiryPage(WebDriver driver) {
+		return new BalanceEnquiryPageObject (driver);
+	}
+	
+	public static DeleteAccountPageObject getDeleteAccountPage(WebDriver driver) {
+		return new DeleteAccountPageObject (driver);
+	}
+	
+	public static DeleteCustomerPageObject getDeleteCustomerPage(WebDriver driver) {
+		return new DeleteCustomerPageObject(driver);
 	}
 }

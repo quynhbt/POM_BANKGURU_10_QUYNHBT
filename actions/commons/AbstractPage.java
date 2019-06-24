@@ -462,6 +462,12 @@ public class AbstractPage {
 	    		return PageFactoryMananger.getLoginPage(driver);
 	    	case "Fund Transfer":
 	    		return PageFactoryMananger.getFundTransferPage(driver);
+	    	case "Balance Enquiry":
+	    		return PageFactoryMananger.getBalanceEnquiryPage(driver);
+	    	case "Delete Account":
+	    		return PageFactoryMananger.getDeleteAccountPage(driver);
+	    	case "Delete Customer":
+	    		return PageFactoryMananger.getDeleteCustomerPage(driver);
 	    	default:
 	    		return PageFactoryMananger.getHomePage(driver);
 	    	}

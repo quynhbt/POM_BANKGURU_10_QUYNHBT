@@ -11,7 +11,7 @@
 	<test name="Run on Firefox">
 		<parameter name="browser" value="firefox" />
 		<classes>
-			<class name="com.bankguru.account.Account_level_10_AssertVerify_Log_Report" />
+			<class name="com.bankguru.account.PaymentFunction" />
 		</classes>
 	</test>
 </suite> 

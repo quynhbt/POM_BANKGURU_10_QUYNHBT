@@ -125,6 +125,67 @@ public class PaymentFunction extends AbstractTest {
 		Assert.assertEquals(depositPage.getTextCurrentBalance(), "62234");
 	}
 	
+	@Test
+	public void TC_06_TransferIntoAnotherAccountAndCheck() {
+		fundTransferPage=(FundTransferPageObject) withdrawPage.openMultiplePage(driver, "Fund Transfer");
+		Assert.assertTrue(fundTransferPage.isFundTransferDisplayed());
+ 
+		fundTransferPage.inputPayersAccount(accountID);
+		fundTransferPage.inputPayeessAccount();
+		fundTransferPage.inputAmount();
+		fundTransferPage.inputDescription();
+		fundTransferPage.clickSubmit();
+
+		Assert.assertTrue(fundTransferPage.isTransactionSuccessfullyPageDisplayed());
+		Assert.assertEquals(fundTransferPage.getAmountFundTranster(), "10000");
+	}
+	
+	@Test
+	public void TC_07_CheckBalance() {
+		balanceEnquiryPage=(BalanceEnquiryPageObject) fundTransferPage.openMultiplePage(driver, "Balance Enquiry");
+		Assert.assertTrue(balanceEnquiryPage.isBalanceEnquiryDisplayed());
+
+		balanceEnquiryPage.inputAccountID(accountID);
+		balanceEnquiryPage.clickSubmit();
+
+		Assert.assertTrue(balanceEnquiryPage.isBalanceEnquirySuccessfullyPageDisplayed("//p[text()='Balance Details for Account "+accountID+"']"));
+		Assert.assertEquals(balanceEnquiryPage.getBalanceEnquiry(), "62234");
+	}
+	
+	@Test
+	public void TC_08_DeleteAllAccountAndCheck() throws Exception {
+		deleteAccountPage=(DeleteAccountPageObject) balanceEnquiryPage.openMultiplePage(driver, "Delete Account");
+		Assert.assertTrue(deleteAccountPage.isDeleteAccountDisplayed());
+
+		deleteAccountPage.inputAccountID(accountID);
+		deleteAccountPage.clickSubmit();
+		Thread.sleep(3000);
+		deleteAccountPage.AcceptDeleteAccountPageDisplayed();
+		Assert.assertEquals(deleteAccountPage.getDeleteAccountSuccessfullyPageDisplayed(), "Account Deleted Sucessfully");
+		Thread.sleep(3000);
+		deleteAccountPage.AcceptDeleteAccountSuccessfullyPageDisplayed();
+
+		homePage=(HomePageObject) deleteAccountPage.openMultiplePage(driver, "Manager");
+		Assert.assertTrue(homePage.isWelcomeMessageDisplayed());
+	}
+	
+	@Test
+	public void TC_09_DeleteExistCustomerAccountAndCheck() throws Exception {
+		deleteCustomerPage=(DeleteCustomerPageObject) homePage.openMultiplePage(driver, "Delete Customer");
+		Assert.assertTrue(deleteCustomerPage.isDeleteCustomerDisplayed());
+
+		deleteCustomerPage.inputCustomerID(accountID);
+		deleteCustomerPage.clickSubmit();
+		Thread.sleep(3000);
+		deleteCustomerPage.AcceptDeleteAccountPageDisplayed();
+		Assert.assertEquals(deleteCustomerPage.getDeleteAccountSuccessfullyPageDisplayed(), "Customer does not exist!!");
+		Thread.sleep(3000);
+		deleteCustomerPage.AcceptDeleteAccountSuccessfullyPageDisplayed();
+
+		homePage=(HomePageObject) deleteCustomerPage.openMultiplePage(driver, "Manager");
+		Assert.assertTrue(homePage.isWelcomeMessageDisplayed());
+	}
+	
 	@Parameters("browser")
 	@BeforeClass
 	public void beforeClass(String browserName) {
